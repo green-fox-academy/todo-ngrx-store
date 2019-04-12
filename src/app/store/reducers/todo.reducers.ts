@@ -16,12 +16,6 @@ export const initialState: TodoState = {
 
 export function todoReducer(state: TodoState = initialState, action: TodoAction): TodoState {
   switch (action.type) {
-    case 'LOAD TODOS': {
-      return {
-        ...state,
-        loadTodosError: null
-      };
-    }
     case 'SUCCESSFULLY LOADED TODOS': {
       const todos = action.payload;
       return {
@@ -35,12 +29,6 @@ export function todoReducer(state: TodoState = initialState, action: TodoAction)
         ...state,
         todos: [],
         loadTodosError: action.payload
-      };
-    }
-    case 'UPDATE TODO': {
-      return {
-        ...state,
-        updateTodoError: null
       };
     }
     case 'SUCCESSFULLY UPDATED TODO': {

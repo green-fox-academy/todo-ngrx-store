@@ -9,10 +9,9 @@ import {
   LoadTodosFailure,
   LoadTodosSuccess,
   UpdateTodoFailure,
-  UpdateTodoSuccess,
-  LoadTodos
+  UpdateTodoSuccess
 } from 'src/app/store/actions/todo.actions';
-import { getLoadTodosError, getTodos, getUpdateTodoError, getTodoState } from 'src/app/store/selectors/todo.selectors';
+import { getLoadTodosError, getTodos, getUpdateTodoError } from 'src/app/store/selectors/todo.selectors';
 
 @Component({
   selector: 'app-todos',
@@ -42,24 +41,6 @@ export class TodosComponent implements OnInit {
         this.store.dispatch(new LoadTodosFailure('Something went wrong'));
       }
     );
-  }
-
-  onComplete(id: number): void {
-    this.todoSvc
-      .setCompleted(id, true)
-      .subscribe(
-        (updatedTodo: Todo) => this.store.dispatch(new UpdateTodoSuccess(updatedTodo)),
-        (err: HttpErrorResponse) => this.store.dispatch(new UpdateTodoFailure('Something went wrong'))
-      );
-  }
-
-  onUndo(id: number): void {
-    this.todoSvc
-      .setCompleted(id, false)
-      .subscribe(
-        (updatedTodo: Todo) => this.store.dispatch(new UpdateTodoSuccess(updatedTodo)),
-        (err: HttpErrorResponse) => this.store.dispatch(new UpdateTodoFailure('Something went wrong'))
-      );
   }
 
   dispatchError(): void {
