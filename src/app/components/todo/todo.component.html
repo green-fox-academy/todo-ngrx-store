@@ -1,0 +1,10 @@
+<div class="card">
+  <p>Task: {{ todo?.task }}</p>
+  <p>Completed: {{ todo?.completed ? 'Yes' : 'No' }}</p>
+  <button *ngIf="!todo?.completed" class="btn btn-primary" (click)="complete.emit(todo?.id)">
+    Complete
+  </button>
+  <button *ngIf="todo?.completed" class="btn btn-warning" (click)="undo.emit(todo?.id)">
+    Undo
+  </button>
+</div>
