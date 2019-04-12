@@ -1,8 +1,9 @@
 <div class="container">
-  <app-error *ngIf="error" [errorMessage]="error"></app-error>
-  <button class="btn btn-danger mt-4" (click)="toggleError()">ERROR</button>
+  <app-error></app-error>
+  <button class="btn btn-danger mt-4" (click)="dispatchError()">ERROR</button>
+  <button class="btn btn-primary mt-2" (click)="dispatchLoadTodos()">LOAD</button>
   <app-todo
-    *ngFor="let todo of (todos | async)"
+    *ngFor="let todo of (todos$ | async)"
     [todo]="todo"
     (complete)="onComplete($event)"
     (undo)="onUndo($event)"
