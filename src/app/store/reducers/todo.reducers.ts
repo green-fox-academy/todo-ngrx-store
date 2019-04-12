@@ -14,7 +14,7 @@ export const initialState: TodoState = {
   updateTodoError: null
 };
 
-export function todoReducer(state: TodoState, action: TodoAction): TodoState {
+export function todoReducer(state: TodoState = initialState, action: TodoAction): TodoState {
   switch (action.type) {
     case 'LOAD TODOS': {
       return {

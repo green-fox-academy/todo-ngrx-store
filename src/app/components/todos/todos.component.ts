@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { TodoService } from 'src/app/services/todo.service';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Todo } from 'src/app/models/Todo';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Todo } from 'src/app/models/Todo';
+import { TodoService } from 'src/app/services/todo.service';
 import { AppState } from 'src/app/store';
 import {
-  LoadTodos,
   LoadTodosFailure,
   LoadTodosSuccess,
-  UpdateTodo,
+  UpdateTodoFailure,
   UpdateTodoSuccess,
-  UpdateTodoFailure
+  LoadTodos
 } from 'src/app/store/actions/todo.actions';
-import { getTodos, getLoadTodosError, getUpdateTodoError } from 'src/app/store/selectors/todo.selectors';
+import { getLoadTodosError, getTodos, getUpdateTodoError, getTodoState } from 'src/app/store/selectors/todo.selectors';
 
 @Component({
   selector: 'app-todos',
@@ -36,7 +34,6 @@ export class TodosComponent implements OnInit {
   }
 
   loadTodos(): void {
-    this.store.dispatch(new LoadTodos());
     this.todoSvc.findAll().subscribe(
       (todos: Todo[]) => {
         this.store.dispatch(new LoadTodosSuccess(todos));
@@ -48,7 +45,6 @@ export class TodosComponent implements OnInit {
   }
 
   onComplete(id: number): void {
-    this.store.dispatch(new UpdateTodo({ id, completed: true }));
     this.todoSvc
       .setCompleted(id, true)
       .subscribe(
@@ -58,7 +54,6 @@ export class TodosComponent implements OnInit {
   }
 
   onUndo(id: number): void {
-    this.store.dispatch(new UpdateTodo({ id, completed: false }));
     this.todoSvc
       .setCompleted(id, false)
       .subscribe(
