@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Todo } from 'src/app/models/Todo';
 import { TodoService } from 'src/app/services/todo.service';
-import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { UpdateTodoSuccess, UpdateTodoFailure } from 'src/app/store/actions/todo.actions';
-import { HttpErrorResponse } from '@angular/common/http';
+import { UpdateTodoFailure, UpdateTodoSuccess } from 'src/app/store/actions/todo.actions';
 
 @Component({
   selector: 'app-todo',

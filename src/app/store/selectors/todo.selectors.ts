@@ -8,12 +8,7 @@ export const getTodos = createSelector(
   (state: TodoState) => state.todos
 );
 
-export const getLoadTodosError = createSelector(
+export const getError = createSelector(
   getTodoState,
-  (state: TodoState) => state.loadTodosError
-);
-
-export const getUpdateTodoError = createSelector(
-  getTodoState,
-  (state: TodoState) => state.updateTodoError
+  (state: TodoState) => state.error
 );

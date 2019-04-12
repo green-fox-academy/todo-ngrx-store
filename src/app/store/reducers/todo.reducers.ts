@@ -4,14 +4,12 @@ import { TodoAction } from '../actions/todo.actions';
 
 export interface TodoState {
   todos: Todo[];
-  loadTodosError: string | null;
-  updateTodoError: string | null;
+  error: string | null;
 }
 
 export const initialState: TodoState = {
   todos: [],
-  loadTodosError: null,
-  updateTodoError: null
+  error: null
 };
 
 export function todoReducer(state: TodoState = initialState, action: TodoAction): TodoState {
@@ -20,7 +18,7 @@ export function todoReducer(state: TodoState = initialState, action: TodoAction)
       const todos = action.payload;
       return {
         ...state,
-        loadTodosError: null,
+        error: null,
         todos
       };
     }
@@ -28,7 +26,7 @@ export function todoReducer(state: TodoState = initialState, action: TodoAction)
       return {
         ...state,
         todos: [],
-        loadTodosError: action.payload
+        error: action.payload
       };
     }
     case 'SUCCESSFULLY UPDATED TODO': {
@@ -37,13 +35,13 @@ export function todoReducer(state: TodoState = initialState, action: TodoAction)
       return {
         ...state,
         todos,
-        updateTodoError: null
+        error: null
       };
     }
     case 'FAILED TO UPDATE TODO': {
       return {
         ...state,
-        updateTodoError: action.payload
+        error: action.payload
       };
     }
     default:

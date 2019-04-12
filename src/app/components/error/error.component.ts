@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store';
-import { getLoadTodosError } from 'src/app/store/selectors/todo.selectors';
+import { getError } from 'src/app/store/selectors/todo.selectors';
 
 @Component({
   selector: 'app-error',
@@ -14,6 +14,6 @@ export class ErrorComponent {
   imgSrc = 'https://i.ytimg.com/vi/3XcGpCw1w5k/maxresdefault.jpg';
 
   constructor(private store: Store<AppState>) {
-    this.errorMessage$ = this.store.select(getLoadTodosError);
+    this.errorMessage$ = this.store.select(getError);
   }
 }
